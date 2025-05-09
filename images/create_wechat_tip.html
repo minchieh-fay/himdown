@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信提示图片生成</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f5f5f5;
+        }
+        
+        .wechat-tip {
+            width: 300px;
+            height: 300px;
+            background: #fff;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .wechat-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: #61C118;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .wechat-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: white;
+        }
+        
+        .arrow {
+            width: 80px;
+            height: 40px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .arrow:before {
+            content: "";
+            width: 30px;
+            height: 30px;
+            border-top: 4px solid #333;
+            border-right: 4px solid #333;
+            transform: rotate(45deg);
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        
+        .arrow:after {
+            content: "";
+            width: 80px;
+            height: 4px;
+            background: #333;
+            position: absolute;
+            top: 15px;
+            left: 0;
+        }
+        
+        .tip-text {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="wechat-tip">
+        <div class="wechat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                <path d="M6,2 C3.23857813,2 1,4.01471875 1,6.5 C1,7.75882812 1.5743125,8.89692188 2.5,9.71364063 L2,12 L4.5,10.7939844 C4.97351563,10.9278437 5.47739062,11 6,11 C6.0695625,11 6.13870313,10.998375 6.20757812,10.9958438 C6.07275,10.6018281 6,10.1835312 6,9.75 C6,7.40279687 8.12664063,5.5 10.75,5.5 C10.7922187,5.5 10.8343125,5.50053125 10.8762656,5.50151562 C10.3716094,3.49679687 8.38010937,2 6,2 Z M4.25,5.5 C3.83578125,5.5 3.5,5.16421875 3.5,4.75 C3.5,4.33578125 3.83578125,4 4.25,4 C4.66421875,4 5,4.33578125 5,4.75 C5,5.16421875 4.66421875,5.5 4.25,5.5 Z M7.75,5.5 C7.33578125,5.5 7,5.16421875 7,4.75 C7,4.33578125 7.33578125,4 7.75,4 C8.16421875,4 8.5,4.33578125 8.5,4.75 C8.5,5.16421875 8.16421875,5.5 7.75,5.5 Z M15,9.75 C15,7.6789375 13.0972031,6 10.75,6 C8.40279687,6 6.5,7.6789375 6.5,9.75 C6.5,11.8210625 8.40279687,13.5 10.75,13.5 C11.0758438,13.5 11.393125,13.4676406 11.6979375,13.406375 L13.5,14 L13.2460781,12.7854219 C14.3089688,12.1037813 15,10.9980938 15,9.75 Z M9.125,9.25 C8.77982812,9.25 8.5,8.97017188 8.5,8.625 C8.5,8.27982812 8.77982812,8 9.125,8 C9.47017188,8 9.75,8.27982812 9.75,8.625 C9.75,8.97017188 9.47017188,9.25 9.125,9.25 Z M12.375,9.25 C12.0298281,9.25 11.75,8.97017188 11.75,8.625 C11.75,8.27982812 12.0298281,8 12.375,8 C12.7201719,8 13,8.27982812 13,8.625 C13,8.97017188 12.7201719,9.25 12.375,9.25 Z" />
+            </svg>
+        </div>
+        <div class="arrow"></div>
+        <div class="tip-text">请在浏览器中打开</div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,42 @@
+{
+  "windows": {
+    "version": "1.0.0",
+    "build": "20240315",
+    "x64": {
+      "filename": "himdown-windows-x64-1.0.0.exe",
+      "size": "45.2MB",
+      "url": "/downloads/himdown-windows-x64-1.0.0.exe"
+    },
+    "x86": {
+      "filename": "",
+      "size": "42.8MB",
+      "url": "/downloads/himdown-windows-x86-1.0.0.exe"
+    }
+  },
+  "macos": {
+    "version": "1.0.0",
+    "build": "20240315",
+    "x64": {
+      "filename": "",
+      "size": "48.5MB",
+      "url": "/downloads/himdown-macos-x64-1.0.0.dmg"
+    },
+    "arm64": {
+      "filename": "",
+      "size": "46.2MB",
+      "url": "/downloads/himdown-macos-arm64-1.0.0.dmg"
+    }
+  },
+  "android": {
+    "version": "1.0.0",
+    "build": "20240315",
+    "filename": "himdown-android-1.0.0.apk",
+    "size": "35.6MB",
+    "url": "/downloads/himdown-android-1.0.0.apk"
+  },
+  "ios": {
+    "version": "1.0.0",
+    "build": "20240315",
+    "appstore_url": ""
+  }
+} 

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华创密信 - 下载中心</title>
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2C71EE;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .download-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .download-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .download-card h2 {
+            color: #2C71EE;
+            margin-bottom: 15px;
+        }
+
+        .platform-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            fill: #2C71EE;
+        }
+
+        .download-card .version {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .download-card .size {
+            color: #999;
+            font-size: 0.8em;
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2C71EE;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin-bottom: 10px;
+            border: none;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background: #1B4FE5;
+        }
+
+        .qr-code {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .qr-code img {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .wechat-tip {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+
+        .wechat-tip iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .close-tip {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #071440;
+            color: white;
+            padding: 60px 0;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            flex: 2;
+            min-width: 300px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            max-width: 180px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo-text {
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 400px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-column {
+            flex: 3;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #fff;
+            position: relative;
+        }
+
+        .footer-section h3:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 40px;
+            height: 3px;
+            background-color: #2C71EE;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .footer-section ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2C71EE;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-qrcode {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .footer-qrcode h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-qrcode h3:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -10px;
+            width: 40px;
+            height: 3px;
+            background-color: #2C71EE;
+            margin: 0 auto;
+        }
+
+        .footer-qrcode img {
+            max-width: 150px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .download-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                flex-direction: column;
+            }
+
+            .footer-column {
+                flex-direction: column;
+            }
+
+            .footer-section, .footer-logo, .footer-qrcode {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG图标定义 -->
+    <div id="svg-container"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>华创密信</h1>
+            <p>安全、高效的即时通讯工具</p>
+        </div>
+
+        <div class="download-grid" id="downloadGrid">
+            <!-- 下载卡片将通过 JavaScript 动态生成 -->
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="/images/hitry-logo.svg" alt="华创视讯">
+                <div class="footer-logo-text">
+                    全球领先的以音视频技术为核心的协作通信产品制造商和解决方案提供商
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <div class="footer-section">
+                    <h3>关于我们</h3>
+                    <ul>
+                        <li><a href="https://www.hitry.com/about/" target="_blank">企业介绍</a></li>
+                        <li><a href="https://www.hitry.com/about/news/2.html" target="_blank">企业新闻</a></li>
+                        <li><a href="https://www.hitry.com/about/news/1.html" target="_blank">行业资讯</a></li>
+                        <li><a href="https://www.hitry.com/about/join.html" target="_blank">人才招聘</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <ul>
+                        <li>0571-87235761</li>
+                        <li>hitry@hitry.com</li>
+                        <li>杭州市滨江区滨安路1168号施强广场1号楼</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-qrcode">
+                <h3>官方微信</h3>
+                <img src="/images/qrcode.png" alt="微信二维码">
+            </div>
+        </div>
+    </footer>
+
+    <div class="wechat-tip" id="wechatTip">
+        <div class="close-tip" onclick="hideWechatTip()">×</div>
+        <iframe src="/images/wechat-tip.html" frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+
+    <script>
+        // 加载SVG图标
+        async function loadSvgIcons() {
+            try {
+                const response = await fetch('/images/icons.svg');
+                const svgText = await response.text();
+                document.getElementById('svg-container').innerHTML = svgText;
+            } catch (error) {
+                console.error('加载SVG图标失败:', error);
+            }
+        }
+
+        // 检测是否在微信浏览器中
+        function isWeixinBrowser() {
+            return /MicroMessenger/i.test(navigator.userAgent);
+        }
+
+        // 显示微信提示
+        function showWechatTip() {
+            document.getElementById('wechatTip').style.display = 'block';
+        }
+
+        // 隐藏微信提示
+        function hideWechatTip() {
+            document.getElementById('wechatTip').style.display = 'none';
+        }
+
+        // 加载版本信息并生成下载卡片
+        async function loadVersions() {
+            try {
+                const response = await fetch('/versions.json');
+                const versions = await response.json();
+                const grid = document.getElementById('downloadGrid');
+                
+                // Windows
+                if (versions.windows && (versions.windows.x64?.filename || versions.windows.x86?.filename)) {
+                    const winCard = createDownloadCard('Windows', versions.windows);
+                    grid.appendChild(winCard);
+                }
+
+                // macOS
+                if (versions.macos && (versions.macos.x64?.filename || versions.macos.arm64?.filename)) {
+                    const macCard = createDownloadCard('macOS', versions.macos);
+                    grid.appendChild(macCard);
+                }
+
+                // Android
+                if (versions.android && versions.android.filename) {
+                    const androidCard = createDownloadCard('Android', versions.android);
+                    grid.appendChild(androidCard);
+                }
+
+                // iOS
+                if (versions.ios && versions.ios.appstore_url) {
+                    const iosCard = createDownloadCard('iOS', versions.ios);
+                    grid.appendChild(iosCard);
+                }
+            } catch (error) {
+                console.error('加载版本信息失败:', error);
+            }
+        }
+
+        // 创建下载卡片
+        function createDownloadCard(platform, info) {
+            const card = document.createElement('div');
+            card.className = 'download-card';
+            
+            let iconName = 'icon-' + platform.toLowerCase();
+            if (platform === 'macOS') iconName = 'icon-mac';
+            
+            let html = `
+                <svg class="platform-icon">
+                    <use xlink:href="#${iconName}"></use>
+                </svg>
+                <h2>${platform}</h2>
+                <div class="version">版本：${info.version || ''}</div>
+            `;
+
+            if (platform === 'iOS') {
+                html += `
+                    <a href="${info.appstore_url}" class="download-btn" target="_blank">
+                        前往 App Store 下载
+                    </a>
+                `;
+            } else if (platform === 'Android') {
+                html += `
+                    <div class="size">${info.size || ''}</div>
+                    <a href="${info.url}" class="download-btn" id="android-download-btn">
+                        下载 APK
+                    </a>
+                `;
+                // 检测是否微信浏览器
+                if (isWeixinBrowser()) {
+                    setTimeout(() => {
+                        const androidBtn = document.getElementById('android-download-btn');
+                        if (androidBtn) {
+                            androidBtn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                showWechatTip();
+                            });
+                        }
+                    }, 100);
+                }
+            } else if (platform === 'Windows') {
+                if (info.x64 && info.x64.filename) {
+                    html += `
+                        <div class="size">${info.x64.size || ''}</div>
+                        <a href="${info.x64.url}" class="download-btn">
+                            下载 64 位版本
+                        </a>
+                    `;
+                }
+                
+                if (info.x86 && info.x86.filename) {
+                    html += `
+                        <a href="${info.x86.url}" class="download-btn" style="margin-left: 10px;">
+                            下载 32 位版本
+                        </a>
+                    `;
+                }
+            } else if (platform === 'macOS') {
+                if (info.x64 && info.x64.filename) {
+                    html += `
+                        <div class="size">${info.x64.size || ''}</div>
+                        <a href="${info.x64.url}" class="download-btn">
+                            下载 Intel 版本
+                        </a>
+                    `;
+                }
+                
+                if (info.arm64 && info.arm64.filename) {
+                    html += `
+                        <a href="${info.arm64.url}" class="download-btn" style="margin-left: 10px;">
+                            下载 Apple Silicon 版本
+                        </a>
+                    `;
+                }
+            }
+
+            card.innerHTML = html;
+            return card;
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSvgIcons();
+            await loadVersions();
+        });
+    </script>
+</body>
+</html> 
