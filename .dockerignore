@@ -1,0 +1,11 @@
+.git
+.gitignore
+.DS_Store
+README.md
+LICENSE
+main.go
+*.log
+tmp.html
+build.sh
+.dockerignore
+Dockerfile 
